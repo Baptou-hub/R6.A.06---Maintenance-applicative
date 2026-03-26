@@ -1,42 +1,13 @@
 <?php
-    $link = mysqli_connect('localhost', 'root', '', 'blog_db');
-    
-    $query= 'SELECT login FROM Users WHERE login="'.$_POST['login'].'" and password="'.$_POST['password'].'"';
-    $resultlogin = mysqli_query($link, $query );
-    
-    if( mysqli_num_rows( $resultlogin) ){
-        mysqli_free_result( $resultlogin );
-        $resultall = mysqli_query($link, 'SELECT id, title FROM Post');
-    }
-    else{
-        header( "refresh:5;url=index.html" );
-        echo 'Erreur de login et/ou de mot de passe (redirection automatique dans 5 sec.)';
-        exit;
-    }
-?>
+// Charge le modèle contenant les fonctions d'accès à la BDD
+require_once 'model.php';
 
-<!DOCTYPE html>
-<html lang="fr">
- <head>
-  <title>Exemple Blog Basic PHP</title>
-  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
- </head>
- <body>
-    <p> Hello <?php echo $_POST['login']; ?> </p>
-    <h1>List of Posts</h1>
-    <ul>
-        <?php while ($row = mysqli_fetch_assoc($resultall)): ?>
-        <li>
-            <a href="post.php?id=<?php echo $row['id']; ?>">
-            <?php echo $row['title']; ?>
-            </a>
-        </li>
-        <?php endwhile ?>
-    </ul>
+// Si l'utilisateur est authentifié, on récupère ses infos et les annonces
+if( isUser($_POST['login'], $_POST['password']) ) {
+    $login = $_POST['login'];
+    $annonces = getAllAnnonces();
+}
 
- </body>
-</html>
-
-<?php
-    mysqli_close( $link );
+// Affiche la vue avec les données
+require 'view/annonces.php';
 ?>
