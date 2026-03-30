@@ -1,7 +1,7 @@
 <?php $title= 'Exemple Annonces Basic PHP: Connexion'; ?>
 
-<?php ob_start(); // Met le HTML suivant en mémoire tampon ?>
-    <form method="post" action="annonces.php">
+<?php ob_start(); ?>
+    <form method="post" action="/annonces/index.php/annonces">
         <label for="login"> Votre identifiant </label> :
         <input type="text" name="login" id="login" placeholder="defaut" maxlength="12" required />
         <br />
@@ -9,6 +9,6 @@
         <input type="password" name="password" id="password" maxlength="12" required />
         <input type="submit" value="Envoyer">
     </form>
-<?php $content = ob_get_clean(); // Récupère le buffer dans $content ?>
+<?php $content = ob_get_clean(); ?>
 
-<?php require 'layout.php'; // Injecte $title et $content dans le squelette ?>
+<?php require 'layout.php'; ?>

@@ -39,7 +39,7 @@ function getAllAnnonces()
 {
     $link = openConnection();
 
-    // Récupère uniquement l'id et le titre de chaque annonce
+    // Récupère uniquement l'id et le titre de chaque annonces
     $result = mysqli_query($link, 'SELECT id, title FROM Post');
     $annonces = array();
 
@@ -54,7 +54,7 @@ function getAllAnnonces()
     return $annonces;
 }
 
-// Retourne une annonce spécifique selon son identifiant
+// Retourne une annonces spécifique selon son identifiant
 function getPost($id)
 {
     $link = openConnection();
